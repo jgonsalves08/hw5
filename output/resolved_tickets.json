@@ -1,0 +1,322 @@
+{
+  "generated_from": [
+    "output/audit_trail.json",
+    "data/campus_customs_new.db",
+    "output/approvals.json",
+    "output/drafts.json"
+  ],
+  "starting_checking_balance": 3400.0,
+  "ending_checking_balance": 160.0,
+  "tickets": [
+    {
+      "id": 101,
+      "final_status": "resolved",
+      "outcome": "Tauhid's size S tee is out of stock (0 on hand). Invoice 501 already covers a rush reprint, but the vendor won't ship until it's paid. The team queued the $840 payment, a human approved it, and the reprint is unblocked (estimated arrival 2026-09-05). Customer update saved as a draft.",
+      "run_id": "run-20261014T144551Z-d9ae75",
+      "agents": [
+        {
+          "agent": "Boss",
+          "times_called": 1,
+          "mcp_tools": [
+            "get_ticket",
+            "update_ticket_status"
+          ],
+          "contribution": "There is no CC-TEE-WHITE size S available (0 on hand), and the one-unit shortfall is covered by the existing $840 reprint invoice 501. Bulldog Print Co will not ship while that invoice is unpaid. Payment has been queued for human approval as PAY-001; if approved, the 5-day lead time suggests an estimated arrival of September 5, 2026, but timing is conditional on the vendor being able to ship. Customer message draft DRAFT-001 was saved and not sent. No separate purchase order is needed."
+        },
+        {
+          "agent": "Inventory",
+          "times_called": 1,
+          "mcp_tools": [
+            "get_ticket",
+            "check_inventory",
+            "list_invoices",
+            "list_vendors",
+            "get_desk_today"
+          ],
+          "contribution": "CC-TEE-WHITE size S has 0 on hand against the requested 1, so the shortfall is 1. The matching open invoice 501 already covers the S reprint, but Bulldog Print Co will not ship while that $840 invoice remains unpaid; its listed 5-day lead time gives an ETA of 2026-09-05 if ordered today, though shipment timing is contingent on clearing the invoice."
+        },
+        {
+          "agent": "Accounting",
+          "times_called": 1,
+          "mcp_tools": [
+            "list_obligations",
+            "get_cash_balance",
+            "list_approvals",
+            "list_invoices",
+            "get_desk_today",
+            "prepare_payment"
+          ],
+          "contribution": "Queued payment of overdue invoice 501 for human approval as PAY-001. The $840 payment is safe: cash is $3,400 with no other pending payments, leaving $2,560 if approved; after also paying the $2,400 rent due September 2, only $160 would remain. No separate purchase order was prepared because invoice 501 already covers the exact reprint."
+        },
+        {
+          "agent": "Customer Service",
+          "times_called": 1,
+          "mcp_tools": [
+            "get_ticket",
+            "draft_customer_message"
+          ],
+          "contribution": "Update on your Bulldog tee request"
+        }
+      ],
+      "agents_not_called": [
+        "Facilities"
+      ],
+      "handoffs": [
+        {
+          "n": 1,
+          "from": "Boss",
+          "to": "Inventory",
+          "status": "done"
+        },
+        {
+          "n": 2,
+          "from": "Boss",
+          "to": "Accounting",
+          "status": "done"
+        },
+        {
+          "n": 3,
+          "from": "Boss",
+          "to": "Customer Service",
+          "status": "done"
+        }
+      ],
+      "human_approvals": [
+        {
+          "approval_id": "PAY-001",
+          "type": "payment",
+          "amount": 840.0,
+          "payee": "Bulldog Print Co",
+          "for": "Rush reprint CC-TEE-WHITE S",
+          "prepared_by": "Accounting",
+          "decision": "paid",
+          "decided_by": "Jay",
+          "payment_id": 1,
+          "balance_after": 2560.0,
+          "tables_updated": [
+            "payments",
+            "cash_accounts",
+            "invoices (501 → paid)"
+          ]
+        }
+      ],
+      "drafts": [
+        {
+          "id": "DRAFT-001",
+          "to": "Tauhid Zaman",
+          "subject": "Update on your Bulldog tee request",
+          "sent": false
+        }
+      ],
+      "cash_change": -840.0,
+      "usage": {
+        "requests": 14,
+        "tool_calls": 18,
+        "input_tokens": 26409,
+        "output_tokens": 2794
+      }
+    },
+    {
+      "id": 102,
+      "final_status": "resolved",
+      "outcome": "The rent notice was verified against lease 1 ($2,400 to Elm City Properties, due 2026-09-02, not already paid). The team queued the rent payment once (the duplicate check stopped a second request), and a human approved it.",
+      "run_id": "run-20261014T145732Z-ee6eb3",
+      "agents": [
+        {
+          "agent": "Boss",
+          "times_called": 1,
+          "mcp_tools": [
+            "get_ticket",
+            "get_desk_today",
+            "update_ticket_status"
+          ],
+          "contribution": "The rent notice matches the lease: $2,400 is due to Elm City Properties on 2026-09-02. Accounting confirmed the payment is affordable and already queued for human approval as PAY-002; no payment has been made."
+        },
+        {
+          "agent": "Facilities",
+          "times_called": 2,
+          "mcp_tools": [
+            "get_ticket",
+            "list_leases",
+            "check_overdue",
+            "list_payments"
+          ],
+          "contribution": "Ticket 102’s rent notice is verified and valid to queue: the requester/payee is Elm City Properties, matching lease 1, and the $2,400 amount and 2026-09-02 due date match the lease. It is unpaid and due in 2 days (not overdue); accounting should queue it for named human approval, subject to cash availability. I could not hand it off because accounting reported it is already working this request higher up the chain."
+        },
+        {
+          "agent": "Accounting",
+          "times_called": 2,
+          "mcp_tools": [
+            "get_ticket",
+            "list_obligations",
+            "get_cash_balance",
+            "get_desk_today",
+            "list_approvals",
+            "check_overdue",
+            "list_payments",
+            "prepare_payment"
+          ],
+          "contribution": "The $2,400 Chapel Street rent payment to Elm City Properties is affordable and is already queued as pending human approval under PAY-002; the request was not duplicated. It is due 2026-09-02, and approving it would leave $160 in checking; no other obligations are listed within 30 days."
+        }
+      ],
+      "agents_not_called": [
+        "Inventory",
+        "Customer Service"
+      ],
+      "handoffs": [
+        {
+          "n": 1,
+          "from": "Boss",
+          "to": "Facilities",
+          "status": "done"
+        },
+        {
+          "n": 2,
+          "from": "Boss",
+          "to": "Accounting",
+          "status": "done"
+        },
+        {
+          "n": 3,
+          "from": "Facilities",
+          "to": "Accounting",
+          "status": "done"
+        },
+        {
+          "n": 4,
+          "from": "Accounting",
+          "to": "Facilities",
+          "status": "done"
+        },
+        {
+          "n": 5,
+          "from": "Accounting",
+          "to": "Facilities",
+          "status": "refused (loop guard)"
+        },
+        {
+          "n": 6,
+          "from": "Facilities",
+          "to": "Accounting",
+          "status": "refused (loop guard)"
+        }
+      ],
+      "human_approvals": [
+        {
+          "approval_id": "PAY-002",
+          "type": "payment",
+          "amount": 2400.0,
+          "payee": "Elm City Properties",
+          "for": "Rent for Chapel Street shop",
+          "prepared_by": "Accounting",
+          "decision": "paid",
+          "decided_by": "Jay",
+          "payment_id": 2,
+          "balance_after": 160.0,
+          "tables_updated": [
+            "payments",
+            "cash_accounts",
+            "leases (next_due → 2026-10-02)"
+          ]
+        }
+      ],
+      "drafts": [],
+      "cash_change": -2400.0,
+      "usage": {
+        "requests": 19,
+        "tool_calls": 30,
+        "input_tokens": 36262,
+        "output_tokens": 3413
+      }
+    },
+    {
+      "id": 103,
+      "final_status": "resolved",
+      "outcome": "Counteroffer of $49 per hoodie to Yale AI Club ($27 above cost, $540 profit on 20). 8 size M are on hand. The 12-unit restock (~$264) was not queued because only $160 is left in checking. Reply saved as a draft.",
+      "run_id": "run-20261014T150540Z-a3fe36",
+      "agents": [
+        {
+          "agent": "Boss",
+          "times_called": 1,
+          "mcp_tools": [
+            "get_ticket",
+            "get_desk_today",
+            "update_ticket_status"
+          ],
+          "contribution": "Counteroffer $49 per hoodie (below the $58 list price and above the $22 unit cost). Eight size-M navy hoodies are on hand; 12 more are needed. A 12-unit restock would cost $264, but only $160 is available, so accounting could not queue a purchase order. Bulldog Print Co’s five-day estimate would be September 5, 2026, only if an order is placed today. Customer message draft DRAFT-002 is saved and has not been sent."
+        },
+        {
+          "agent": "Inventory",
+          "times_called": 1,
+          "mcp_tools": [
+            "check_inventory",
+            "list_invoices",
+            "list_vendors",
+            "get_desk_today"
+          ],
+          "contribution": "CC-HOOD-NAVY size M cannot fulfill the 20-unit request: 8 are on hand, leaving a shortfall of 12. Apparel restock vendor Bulldog Print Co (vendor 1) has a 5-day lead time and could deliver by 2026-09-05 if ordered today (2026-08-31); it has no open unpaid invoice and will ship new product."
+        },
+        {
+          "agent": "Accounting",
+          "times_called": 1,
+          "mcp_tools": [
+            "get_cash_balance",
+            "list_obligations",
+            "check_price",
+            "get_ticket"
+          ],
+          "contribution": "Recommend counteroffering Yale AI Club $49 per hoodie (15.5% off list), which is $27 above unit cost and earns $540 total on 20 units. The 12-unit restock would cost an estimated $264, but only $160 is available and no obligations are listed, so I did not queue a purchase order; the $104 cash shortfall prevents an approval request now."
+        },
+        {
+          "agent": "Customer Service",
+          "times_called": 1,
+          "mcp_tools": [
+            "get_ticket",
+            "draft_customer_message"
+          ],
+          "contribution": "Draft saved: “Your navy hoodie request.”"
+        }
+      ],
+      "agents_not_called": [
+        "Facilities"
+      ],
+      "handoffs": [
+        {
+          "n": 1,
+          "from": "Boss",
+          "to": "Inventory",
+          "status": "done"
+        },
+        {
+          "n": 2,
+          "from": "Boss",
+          "to": "Accounting",
+          "status": "done"
+        },
+        {
+          "n": 3,
+          "from": "Boss",
+          "to": "Customer Service",
+          "status": "done"
+        }
+      ],
+      "human_approvals": [],
+      "human_approvals_note": "No approval needed: nothing was queued for this ticket.",
+      "drafts": [
+        {
+          "id": "DRAFT-002",
+          "to": "Yale AI Club",
+          "subject": "Your navy hoodie request",
+          "sent": false
+        }
+      ],
+      "cash_change": 0,
+      "usage": {
+        "requests": 16,
+        "tool_calls": 17,
+        "input_tokens": 28595,
+        "output_tokens": 3124
+      }
+    }
+  ]
+}

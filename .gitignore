@@ -1,0 +1,22 @@
+# Secrets: the real key never leaves this machine (.env.example is committed)
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Frontend build + dependencies
+node_modules/
+frontend/dist/
+
+# Local tool / OS files
+.claude/
+.DS_Store
+*.log
+
+# Lock and temp files the app writes next to its JSON outputs
+output/.*.lock
+output/*.tmp

@@ -1,0 +1,157 @@
+{
+  "database": "data/campus_customs_new.db",
+  "mcp_server": "campus-customs",
+  "desk_date_today": "2026-08-31",
+  "tests": [
+    {
+      "ticket_id": 101,
+      "prompt": "Using the campus-customs MCP, check inventory for ticket 101: one Classic Bulldog Tee (CC-TEE-WHITE) in size S.",
+      "tool_name": "check_inventory",
+      "tool_input": {
+        "sku": "CC-TEE-WHITE",
+        "size": "S",
+        "qty_requested": 1
+      },
+      "tool_output": {
+        "sku": "CC-TEE-WHITE",
+        "name": "Classic Bulldog Tee",
+        "stocked": true,
+        "sizes": [
+          {
+            "size": "S",
+            "qty": 0,
+            "location": "Aisle B"
+          },
+          {
+            "size": "M",
+            "qty": 5,
+            "location": "Aisle B"
+          },
+          {
+            "size": "L",
+            "qty": 3,
+            "location": "Aisle B"
+          },
+          {
+            "size": "XL",
+            "qty": 2,
+            "location": "Aisle B"
+          }
+        ],
+        "total_on_hand": 10,
+        "size": "S",
+        "size_stocked": true,
+        "on_hand": 0,
+        "in_stock": false,
+        "qty_requested": 1,
+        "can_fulfill": false,
+        "shortfall": 1
+      },
+      "db_check": {
+        "query": "SELECT size, qty, location FROM inventory WHERE sku='CC-TEE-WHITE'",
+        "rows": [
+          {
+            "size": "L",
+            "qty": 3,
+            "location": "Aisle B"
+          },
+          {
+            "size": "M",
+            "qty": 5,
+            "location": "Aisle B"
+          },
+          {
+            "size": "S",
+            "qty": 0,
+            "location": "Aisle B"
+          },
+          {
+            "size": "XL",
+            "qty": 2,
+            "location": "Aisle B"
+          }
+        ],
+        "matches": true
+      }
+    },
+    {
+      "ticket_id": 102,
+      "prompt": "Using the campus-customs MCP, check whether ticket 102 is overdue.",
+      "tool_name": "check_overdue",
+      "tool_input": {
+        "ticket_id": 102
+      },
+      "tool_output": {
+        "ticket_id": 102,
+        "ticket_type": "rent_notice",
+        "date_today": "2026-08-31",
+        "can_be_overdue": true,
+        "source": {
+          "table": "leases",
+          "id": 1,
+          "due_date": "2026-09-02",
+          "amount": 2400,
+          "payee": "Elm City Properties",
+          "paid": false
+        },
+        "days_until_due": 2,
+        "overdue": false,
+        "days_overdue": 0
+      },
+      "db_check": {
+        "query": "SELECT date_today FROM desk; SELECT type, lease_id FROM tickets WHERE id=102; SELECT landlord, monthly_rent, next_due FROM leases WHERE id=1; SELECT * FROM payments",
+        "rows": {
+          "desk.date_today": "2026-08-31",
+          "ticket": {
+            "type": "rent_notice",
+            "lease_id": 1
+          },
+          "lease": {
+            "landlord": "Elm City Properties",
+            "monthly_rent": 2400.0,
+            "next_due": "2026-09-02"
+          },
+          "payments": []
+        },
+        "matches": true
+      }
+    },
+    {
+      "ticket_id": 103,
+      "prompt": "Using the campus-customs MCP, check the price of CC-HOOD-NAVY for ticket 103 if we sold 20 at $45 each.",
+      "tool_name": "check_price",
+      "tool_input": {
+        "sku": "CC-HOOD-NAVY",
+        "proposed_unit_price": 45,
+        "qty": 20
+      },
+      "tool_output": {
+        "sku": "CC-HOOD-NAVY",
+        "priced": true,
+        "unit_cost": 22,
+        "list_price": 58,
+        "margin_per_unit": 36,
+        "margin_pct": 62.1,
+        "max_discount_pct_to_break_even": 62.1,
+        "discountable": true,
+        "proposed_unit_price": 45,
+        "discount_pct": 22.4,
+        "above_cost": true,
+        "profit_per_unit": 23,
+        "qty": 20,
+        "order_revenue": 900,
+        "order_profit": 460
+      },
+      "db_check": {
+        "query": "SELECT unit_cost, list_price FROM pricing WHERE sku='CC-HOOD-NAVY'",
+        "rows": [
+          {
+            "unit_cost": 22.0,
+            "list_price": 58.0
+          }
+        ],
+        "matches": true
+      }
+    }
+  ]
+}

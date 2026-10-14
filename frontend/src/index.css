@@ -1,0 +1,65 @@
+:root {
+  --ink: #111312;
+  --ink-soft: #545a55;
+  --paper: #f3f4f0;
+  --card: #ffffff;
+  --mist: #e8ebe5;
+  --mist-2: #dde2d8;
+  --forest-0: #12261a;
+  --forest-1: #1d3b22;
+  --forest-2: #2f5a28;
+  --olive: #6b973b;
+  --lime: #b9e28c;
+  --danger: #c8453c;
+  --radius-xl: 40px;
+  --radius-lg: 26px;
+  --shadow-panel: 0 40px 80px -30px rgba(5, 20, 8, 0.55), 0 12px 30px -12px rgba(5, 20, 8, 0.35);
+  --shadow-card: 0 18px 36px -18px rgba(10, 30, 12, 0.35), 0 2px 6px rgba(10, 30, 12, 0.06);
+  font-family: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 360px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+code,
+.tool-chip {
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+}
+
+:focus-visible {
+  outline: 3px solid var(--lime);
+  outline-offset: 3px;
+}

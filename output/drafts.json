@@ -1,0 +1,22 @@
+[
+  {
+    "id": "DRAFT-001",
+    "ticket_id": 101,
+    "to": "Tauhid Zaman",
+    "subject": "Update on your Bulldog tee request",
+    "body": "Hi Tauhid,\n\nWe\u2019re sorry, but the Bulldog tee in size S is not currently available. We can arrange a rush reprint for you. If we\u2019re able to proceed today once the printer can ship, the estimated arrival is September 5, 2026; this timing is conditional and is not a confirmed delivery date.\n\nPlease let us know if you\u2019d like us to move forward with the reprint. We\u2019ll confirm the timing once it\u2019s available.\n\nCampus Customs",
+    "drafted_by": "customer_service",
+    "drafted_at": "2026-10-14T14:48:12+00:00",
+    "status": "draft (not sent)"
+  },
+  {
+    "id": "DRAFT-002",
+    "ticket_id": 103,
+    "to": "Yale AI Club",
+    "subject": "Your navy hoodie request",
+    "body": "Hi Yale AI Club,\n\nWe can offer the CC-HOOD-NAVY hoodies at $49 each. We currently have 8 in size M available, so we can offer those now. The remaining 12 would need procurement and funding confirmation before we can confirm the full quantity. If the restock is approved and ordered today, the estimated arrival is September 5, 2026, but that timing is not confirmed.\n\nWould you like us to proceed with the 8 available hoodies while the remaining 12 are pending confirmation, or would you prefer to wait until we can confirm all 20?\n\nBest,\nCampus Customs",
+    "drafted_by": "customer_service",
+    "drafted_at": "2026-10-14T15:07:00+00:00",
+    "status": "draft (not sent)"
+  }
+]
